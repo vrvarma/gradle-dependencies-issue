@@ -1,0 +1,12 @@
+
+sourceCompatibility=1.5
+targetCompatibility=1.5
+
+dependencies{
+   
+   compile fileTree(dir: "$libsDir", include: '*.jar',exclude:'*tests.jar')
+}
+
+jar{ archiveName = 'osd.common.jar' }
+
+eclipse { project { name = 'common-util' } }

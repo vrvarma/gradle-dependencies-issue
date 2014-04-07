@@ -1,0 +1,18 @@
+eclipse { project { name = 'discovery-container-common'
+	} }
+dependencies {
+	compile project(":src:common:common")
+	compile project(":src:modules:discovery:container:spring")
+	compile libraries.java_assist
+	testCompile project(path: ':src:modules:discovery:container:spring', configuration: 'testApi')
+	testRuntime libraries.aspectjrt
+	testRuntime libraries.aspectjweaver
+}
+jar{
+	archiveName='discovery-container-common.jar'
+	from ('src'){ include('**/*.xml') }
+	metaInf {
+		from('src/META-INF')
+		include('**')
+	}
+}

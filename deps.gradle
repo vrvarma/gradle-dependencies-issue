@@ -1,0 +1,187 @@
+ext{
+
+   //build properties
+   buildLibDir="${rootDir}/lib"
+
+   cglibVersion = '2.2.2'
+   commonsLangVersion = '2.4'
+   commonsCollectionVersion = '3.2'
+   commonsPoolVersion = '1.6'
+   commonsNetVersion = '1.4.1'
+   commonsNetVersion2 = '3.3'
+   commonsHttpClientVersion = '3.1'
+   commonsBeanUtilVersion='1.8.3'
+   commonsXmlSchemaVersion='2.0.2'
+   apacheWsCommonsVersion='1.4.3'
+   javaxActivationVersion = '1.1.1'
+   junitVersion = '4.8.2'
+   log4jVersion = '1.2.16'
+   jaxbVersion = '2.2.4'
+   springVersion = '3.2.4.RELEASE'
+   springWsVersion='2.1.4.RELEASE'
+   hibernateVersion='4.2.2.Final'
+   xmlunitVersion ='1.3'
+   cloverVersion='3.1.3'
+   slf4jLog4jVersion='1.6.1'
+   easymockVersion='3.2'
+   hsqldbVersion='2.3.2'
+   dbunitVersion='2.4.8'
+   powermockVersion='1.4.10'
+   h2dbVersion='1.3.162'
+   flexJsonVersion='2.1'
+   apacheAMQVersion='5.8.0'
+   aspectjVersion='1.6.8'
+   springBatchVersion='2.1.9.RELEASE'
+   springDataOrclVersion='1.0.0.RELEASE'
+   javaAssistVersion='3.15.0-GA'
+   springAsmVersion='3.1.4.RELEASE'
+   apacheHttpCompVersion='4.2'
+   mockitoVersion='1.9.5'
+   xbeanSpringVersion='3.11'
+
+   libraries=[
+            flex_json:"net.sf.flexjson:flexjson:$flexJsonVersion",
+            log4j: "log4j:log4j:$log4jVersion",
+            common_lang:"commons-lang:commons-lang:$commonsLangVersion",
+            common_collection:"commons-collections:commons-collections:$commonsCollectionVersion",
+            commons_pool:"commons-pool:commons-pool:$commonsPoolVersion",
+            commons_net:"commons-net:commons-net:$commonsNetVersion",
+            commons_net_V2:"commons-net:commons-net:$commonsNetVersion2",
+            common_httpclient:"commons-httpclient:commons-httpclient:$commonsHttpClientVersion",
+            common_beansutil:"commons-beanutils:commons-beanutils:$commonsBeanUtilVersion",
+            commons_xmlschema:"org.apache.ws.xmlschema:xmlschema-core:$commonsXmlSchemaVersion",
+            
+            apache_httpclient:"org.apache.httpcomponents:httpclient:$apacheHttpCompVersion",
+
+           // apache_ws_common:"org.apache.ws.xmlschema:xmlschema-core:$apacheWsCommonsVersion",
+            activemq_all :"org.apache.activemq:activemq-all:$apacheAMQVersion@jar",
+            activemq_pool :"org.apache.activemq:activemq-pool:$apacheAMQVersion@jar",
+
+            hibernate_core:"org.hibernate:hibernate-core:$hibernateVersion",
+            hibernate_entity:"org.hibernate:hibernate-entitymanager:$hibernateVersion",
+            java_assist:"org.javassist:javassist:$javaAssistVersion",
+            hibernate_ehcache:"org.hibernate:hibernate-ehcache:$hibernateVersion",
+
+            slf4j_log4j:"org.slf4j:slf4j-log4j12:$slf4jLog4jVersion",
+            spring_core: "org.springframework:spring-core:$springVersion",
+            spring_beans:"org.springframework:spring-beans:$springVersion",
+            spring_context:"org.springframework:spring-context:$springVersion",
+            spring_expr:"org.springframework:spring-expression:$springVersion",
+            spring_jdbc:"org.springframework:spring-jdbc:$springVersion",
+            spring_tx:"org.springframework:spring-tx:$springVersion",
+            spring_orm:"org.springframework:spring-orm:$springVersion",
+            spring_oxm:"org.springframework:spring-oxm:$springVersion",
+            spring_jms:"org.springframework:spring-jms:$springVersion",
+            spring_web:"org.springframework:spring-web:$springVersion",
+            //spring_xml:"org.springframework:spring-xml:$springVersion",
+            spring_aop:"org.springframework:spring-aop:$springVersion",
+            spring_asm:"org.springframework:spring-asm:$springAsmVersion",
+            spring_webmvc:"org.springframework:spring-webmvc:$springVersion",
+            spring_ws:"org.springframework.ws:spring-ws:$springWsVersion",
+            spring_ws_core:"org.springframework.ws:spring-ws-core:$springWsVersion",
+            spring_batch_core:"org.springframework.batch:spring-batch-core:$springBatchVersion",
+            spring_data_oracle:"org.springframework.data:spring-data-oracle:$springDataOrclVersion",
+
+            spring_ws_security:"org.springframework.ws:spring-ws-security:$springWsVersion",
+            cglib: "cglib:cglib-nodep:$cglibVersion",
+            xbean_spring:"org.apache.xbean:xbean-spring:$xbeanSpringVersion",
+
+            spring_test:"org.springframework:spring-test:$springVersion",
+            spring_ws_test:"org.springframework.ws:spring-ws-test:$springWsVersion",
+            clover:"com.cenqua.clover:clover:$cloverVersion",
+            junit:"junit:junit:$junitVersion",
+            easy_mock:"org.easymock:easymock:$easymockVersion",
+            easy_mock_ext:"org.easymock:easymockclassextension:$easymockVersion",
+            hsqldb:"org.hsqldb:hsqldb:$hsqldbVersion",
+            dbunit:"org.dbunit:dbunit:$dbunitVersion",
+            h2db :"com.h2database:h2:$h2dbVersion",
+            powermock_module :"org.powermock:powermock-module-junit4:$powermockVersion",
+            powermock_api:"org.powermock:powermock-api-easymock:$powermockVersion",
+            mockito:"org.mockito:mockito-all:$mockitoVersion",
+            xmlunit:"xmlunit:xmlunit:$xmlunitVersion",
+            aspectjrt:"org.aspectj:aspectjrt:$aspectjVersion",
+            aspectjweaver:"org.aspectj:aspectjweaver:$aspectjVersion",
+            xjc_jaxb:"com.sun.xml.bind:jaxb-xjc:$jaxbVersion"
+         ]
+
+	// Cramer libraries needed for Mobility project.
+		cramer_lib_mobility=[
+								rm:fileTree(dir: "${buildLibDir}/Cramer/rm", includes: [
+										'**/client/service-support-8*.jar',
+               			'**/client/ldap-8*.jar',
+              			'**/client/infrastructure-8*.jar',
+              			'**/client/common-8*.jar',
+              			'**/client/logging-8*.jar',
+              			'**/db/session-*.jar'
+              				])
+              			]
+
+
+   //Cramer API libraries
+   cramer_libraries=[
+            rm:fileTree(dir: "${buildLibDir}/Cramer/rm", includes: [
+               'customizationkit/jars/common-*.jar','customizationkit/jars/inventory-api-*.jar',
+               '**/db/session-*.jar',
+               '**/server/static-jar-common.jar',
+               '**/db/service-support-13-*.jar',
+               '**/client/ldap-*.jar',
+               '**/client/infrastructure-*.jar',
+               '**/server/static-jar-rm.jar',
+               '**/jars/logging-*.jar',
+               '**/db/rm-api-private-*.jar',
+               '**/thirdpartyjars/axis.jar',
+               '**/CramerAPI/ejb/client/*.jar'
+            ]),
+            de:fileTree(dir: "${buildLibDir}/Cramer/de", includes: [
+               '**/server/static-jar-de.jar'
+            ]),
+            te: fileTree(dir: "${buildLibDir}/Cramer/te", includes: [
+               '**/server/static-jar-te.jar',
+               '**/dbserver/*.jar'
+            ]),
+            te_lite: fileTree(dir: "${buildLibDir}/Cramer/te", includes: [
+               '**/server/static-jar-te.jar',
+            ]),
+            baup:fileTree(dir: "${buildLibDir}/Cramer/baup/CramerOSS/jars", includes: [
+               '**/AUPCommon.jar',
+               '**/BAUP_DeliveryEngine_Callouts.jar',
+               '**/BAUP_DeliveryEngine.jar',
+               '**/BAUP_TaskEngine_Callouts.jar',
+               '**/BAUP_TaskEngine.jar',
+               '**/baup.jar'
+            ]),
+            rp:fileTree(dir: "${buildLibDir}/Cramer/rp", includes:[
+               '**/server/static-jar-rp.jar'
+            ]),
+            techpak:fileTree(dir:"${buildLibDir}/Cramer/techpak/CramerOSS/jars", include: '*.jar'),
+            naming: fileTree(dir:"${buildLibDir}/Cramer/NamingConventions", include: 'mdne.jar'),
+            ces:fileTree(dir:"${buildLibDir}/Cramer/ces/CramerOSS/jars/dbserver", include: 'CES.jar'),
+            sc:fileTree(dir:"${buildLibDir}/Cramer/sc",includes:[
+               '**/java/server/static-jar-sc.jar',
+               '**/order-fulfillment-adapter-ejb.jar'
+            ]),
+            gta:fileTree(dir:"${rootDir}/modules/gta/output/jars",include:'*.jar'),
+            sfa:fileTree(dir:"${buildLibDir}/Cramer/sfa",include:'mrs*.jar'),
+            se:fileTree(dir: "${rootDir}/lib/Cramer/se", include: '*.jar')
+         ]
+
+   thirdparty_libraries=[
+            oracle:':ojdbc5@jar',
+            oracle6:':ojdbc6@jar',
+            oracle_xdk:fileTree(dir: "${buildLibDir}/oracle/xdk", includes: [
+               'xmlparserv2.jar',
+               'classgen.jar',
+            ]),
+            oracle_webservice:fileTree(dir: "${buildLibDir}/oracle/webservice", include: '*.jar'),
+            spring_jvm:fileTree(dir: "${buildLibDir}/spring/oracle_jvm_only", include: '*.jar'),
+            weblogic:':wlfullclient5@jar',
+            //webservices:':webservices@jar',
+            //lpp:fileTree(dir: "${buildLibDir}/lpp", include: '*.jar'),
+            granite:fileTree(dir: "${buildLibDir}/Granite", include: '*.jar'),
+            db_spring_tx:fileTree(dir:"${buildLibDir}/spring/oracle_jvm_only", include: "spring-transactions*.jar"),
+            jacoco:fileTree(dir: "${buildLibDir}/JaCoCo", include:'*.jar')
+
+
+         ]
+
+}

@@ -1,0 +1,6 @@
+rootProject.name='jamborie-inventory-system'
+
+include 'src:common:common'
+include 'src:modules:discovery:container:spring'
+include 'src:modules:discovery:container:common'
+include 'src:modules:discovery:container:message-callouts'

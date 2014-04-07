@@ -1,0 +1,6 @@
+eclipse { project { name = 'discovery-container-spring' } }
+
+jar{
+    archiveName='discovery-container-spring.jar'
+    from ('src'){ include('**/*.xml') }
+}

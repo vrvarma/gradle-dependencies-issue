@@ -1,0 +1,150 @@
+
+apply plugin :'base'
+
+ext{
+   //Dist Lib Properties
+   distDir="$rootDir/mattdist"
+   distDbLibDir="$distDir/dbserver"
+   distLibDir="$distDir/lib"
+   distEarDir="$distDir/ears"
+   distWarDir="$distDir/wars"
+   distScriptsLibDir="$distDir/scripts/lib"
+   distConfigDir="$distDir/config"
+   distSEDir="$distDir/se"
+   distSELibDir="$distSEDir/lib"
+   distSESpringDir="$distSEDir/spring"
+}
+
+allprojects{
+
+   //apply from: 'http://launchpad.net/gradle-templates/trunk/latest/+download/apply.groovy'
+
+   group = 'com.canopi.idis.cis'
+   repositories {
+      
+   }
+   buildDir='target'
+
+   apply from: "file:${rootDir}/deps.gradle"
+}
+
+
+subprojects{ subproject->
+
+   apply plugin:'java'
+   apply plugin: 'eclipse'
+  
+   sourceCompatibility=1.6
+   targetCompatibility=1.6
+
+
+   if(project.path.startsWith(':src:')){
+      sourceSets {
+         main {
+
+            java { srcDir 'src' }
+            resources {
+               srcDir 'config'
+               srcDir 'spring'
+            }
+         }
+         test {
+
+            java { srcDir 'test' }
+            resources {
+               srcDir 'test'
+               srcDir 'test/resources'
+               srcDir 'test/config'
+            }
+         }
+      }
+   }else{
+      sourceSets {
+         main {
+            java { srcDir 'src/java' }
+            resources { srcDir 'src/resources' }
+         }
+         test {
+            java { srcDir 'test/java' }
+            resources { srcDir 'test/resources' }
+
+         }
+      }
+   }
+
+   [compileJava, compileTestJava]*.options*.encoding = 'ISO-8859-1'
+   //    compileJava {
+   //	targetCompatibility = project.targetCompatibility
+   //	sourceCompatibility = project.sourceCompatibility
+   //    }
+   dependencies {
+      compile libraries.log4j
+      compile libraries.common_lang
+      compile libraries.common_collection
+      compile libraries.common_httpclient
+      compile libraries.slf4j_log4j
+
+      testCompile libraries.junit
+      testCompile libraries.easy_mock
+      testCompile libraries.easy_mock_ext
+      testCompile libraries.powermock_module
+      testCompile libraries.powermock_api
+
+      testCompile libraries.hsqldb
+      testCompile libraries.dbunit
+      testCompile libraries.h2db
+      testCompile libraries.xmlunit
+      testCompile libraries.spring_test
+      testCompile libraries.spring_ws_test
+      //testCompile libraries.clover
+
+   }
+
+   test {
+
+      forkEvery = 25
+      int processors = Runtime.runtime.availableProcessors()
+      maxParallelForks= Math.max(2, (int) (processors / 2))
+      maxHeapSize = '1024m'
+      ignoreFailures = true
+      //tweaking memory settings for the forked vm that runs tests
+      jvmArgs '-Xms128m', '-Xmx1024m', '-XX:MaxPermSize=256m'
+
+   }
+
+   task('cleanCache') { task ->
+      GFileUtils.deleteDirectory(new File(task.project.projectDir, '.gradle'))
+   }
+
+   eclipse{
+      classpath{
+         file{
+            beforeMerged { classpath -> classpath.entries.clear() }
+            whenMerged { classpath ->
+               classpath.entries.findAll { entry ->
+                  entry.kind == 'src'&& (entry.path=='test'|| entry.path=='itest') }*.excludes = ['resources/', 'config/']
+            }
+         }
+      }
+   }
+
+   task testJar(type:Jar ){
+
+      classifier='tests'
+      from  sourceSets.test.output
+   }
+   configurations { testApi }
+
+   artifacts { testApi testJar }
+
+   task listJars << {
+      configurations.compile.each { File file ->
+         println file.name
+      }
+   }
+   
+}
+
+
+
+

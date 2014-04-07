@@ -1,0 +1,57 @@
+eclipse { project { name = 'discovery-container-se-callouts'
+	} }
+
+
+dependencies {
+
+	compile project(":src:common:common")
+	compile project(":src:modules:discovery:container:common")
+	compile project(":src:modules:discovery:container:spring")
+
+	compile thirdparty_libraries.oracle6
+	compile thirdparty_libraries.oracle_xdk
+	compile cramer_libraries.se
+	compile cramer_libraries.rm
+
+
+	compile libraries.java_assist
+	compile fileTree(dir: "$libsDir", include: '*.jar',exclude:'*tests.jar')
+
+	testCompile project(path: ':src:modules:discovery:container:spring', configuration: 'testApi')
+}
+jar{ archiveName='discovery-message-callouts.jar' }
+
+configurations{ publish }
+
+
+dependencies{ publish 'asm:asm:3.1', 'cglib:cglib:2.2','org.aspectj:aspectjrt:1.6.8','org.aspectj:aspectjweaver:1.6.8'  }
+
+task copySEConfig<<{
+
+	copy{
+		//overwrite=true
+		into "$distSESpringDir"
+
+		from 'spring/src'
+		include '*.xml'
+
+		from '../j2ee/APP-INF/classes'
+		include '*.properties'
+
+		from ('../spring/src') {
+			include '*.xml'
+			exclude 'tx-context.xml'
+			exclude 'database-context.xml'
+			exclude 'beanRefContext.xml'
+			exclude 'hibernate-context.xml'
+		}
+	}
+	//    copy{
+	//	overwrite=true
+	//	into "$distSELibDir"
+	//
+	//	from(configurations.publish.files)
+	//    }
+}
+
+build.dependsOn copySEConfig
